@@ -64,7 +64,7 @@ export default function Flower() {
   const [data, setData] = useState<TData[]>([]);
 
   useEffect(() => {
-    d3.csv("src/assets/data/thyroid-tests.csv").then((data) => {
+    d3.csv("/assets/data/thyroid-tests.csv").then((data) => {
       const parsedData = data.map((d) => {
         const parseDate = d3.timeParse("%d/%m/%Y");
         return {
