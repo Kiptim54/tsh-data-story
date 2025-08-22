@@ -1,6 +1,6 @@
 import "./style.css";
 
-// COMPONENTS
+// COMPONENTSs
 import Header from "./components/Header.tsx";
 import Diagnosis from "./components/Diagnosis.tsx";
 import Flowers from "./components/Flowers.tsx";
