@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Header() {
   return (
     <div className=' min-h-[30vh] text-white text-center p-20 bg-header-bg bg-cover bg-no-repeat bg-center'>
