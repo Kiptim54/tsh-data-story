@@ -1,9 +1,9 @@
-import Tulip from "../assets/brenda-tulip.svg";
+import Tulip from "../assets/header-thyroid-buttefly.svg";
 
 export default function Diagnosis() {
   return (
-    <div className='flex flex-col md:flex-row items-center justify-between container mx-auto p-16 '>
-      <div className='flex-1 gap-4 flex flex-col'>
+    <div className='flex flex-col-reverse md:flex-row  gap-4  items-center justify-between container mx-auto p-16 '>
+      <div className='flex-1 gap-4 flex flex-col '>
         <h2 className='text-2xl text-secondary-400 font-bold font-lora'>
           The Diagnosis
         </h2>
@@ -31,9 +31,13 @@ export default function Diagnosis() {
           motions.
         </p>
       </div>
-      <div className='flex-1 flex justify-end items-center'>
-        <img src={Tulip} alt='tulip-flower-svg' className=' w-[60%] h-auto' />
-      </div>
+      <figure className='flex-1 flex flex-col justify-end items-center gap-6'>
+        <img src={Tulip} alt='tulip-flower-svg' className=' w-[80%] h-auto' />
+        <figcaption className='text-xs italic'>
+          The thyroid gland is also called the butterfly gland due to its
+          buttefly shape
+        </figcaption>
+      </figure>
     </div>
   );
 }

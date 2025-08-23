@@ -42,6 +42,27 @@ export default function Flowers() {
       <div className='grid  gap-4 py-10'>
         <Flower />
       </div>
+      <sub className='text-right'>
+        Butterfly & Thyroid icons by{" "}
+        <a
+          href='https://thenounproject.com/creator/prosymbols/'
+          target='_blank'
+          title='Butterfly Icons'
+          className='text-secondary-400'
+        >
+          ProSymbols
+        </a>{" "}
+        &{" "}
+        <a
+          href='https://thenounproject.com/creator/imginationlol/'
+          target='_blank'
+          title='Butterfly Icons'
+          className='text-secondary-400'
+        >
+          nuengrutai{" "}
+        </a>
+        from Noun Project (CC BY 3.0)
+      </sub>
     </div>
   );
 }
