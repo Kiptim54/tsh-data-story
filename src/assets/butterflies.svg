@@ -38,15 +38,15 @@
 </g>
 </g>
 <defs>
-<linearGradient id="paint0_linear_164_553" x1="467" y1="178.91" x2="895.357" y2="178.91" gradientUnits="userSpaceOnUse">
+<linearGradient id="midhypo0" idBackup="paint0_linear_164_553"  x1="467" y1="178.91" x2="895.357" y2="178.91" gradientUnits="userSpaceOnUse">
 <stop offset="0.485577" stop-color="#B4E1EC"/>
 <stop offset="0.807692" stop-color="#EB8E44"/>
 </linearGradient>
-<linearGradient id="paint1_linear_164_553" x1="713.007" y1="7.55957" x2="713.007" y2="127.678" gradientUnits="userSpaceOnUse">
+<linearGradient idBackup="paint1_linear_164_553" id="midhypo1" x1="713.007" y1="7.55957" x2="713.007" y2="127.678" gradientUnits="userSpaceOnUse">
 <stop offset="0.60563" stop-color="#B4E1EC"/>
 <stop offset="1" stop-color="#EB8E44"/>
 </linearGradient>
-<linearGradient id="paint2_linear_164_553" x1="649.163" y1="7.87109" x2="649.163" y2="127.598" gradientUnits="userSpaceOnUse">
+<linearGradient idBackup="paint2_linear_164_553" id="midhypo2" x1="649.163" y1="7.87109" x2="649.163" y2="127.598" gradientUnits="userSpaceOnUse">
 <stop offset="0.60563" stop-color="#B4E1EC"/>
 <stop offset="1" stop-color="#EB8E44"/>
 </linearGradient>
