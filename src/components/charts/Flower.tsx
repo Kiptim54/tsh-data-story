@@ -43,6 +43,28 @@ export default function Flower(props: IFlowerProps) {
     }
   };
 
+  const opacitySwitch = (d: TData) => {
+    switch (true) {
+      // default
+      case currentIndex == null:
+        return 1;
+      // hyperthyroid
+      case d.colorStatus === "hyper" && currentIndex === 0:
+        return 1;
+      // midhyperthyroid
+      case d.colorStatus === "midhyper" && currentIndex === 1:
+        return 1;
+      // hypo
+      case d.colorStatus === "hypo" && currentIndex === 2:
+        return 1;
+      // euthyroid
+      case d.colorStatus === "euthyroid" && currentIndex === 3:
+        return 1;
+      default:
+        return 0.1;
+    }
+  };
+
   useEffect(() => {
     d3.csv("/data/thyroid-tests.csv").then((data) => {
       const parsedData = data.map((d) => {
@@ -108,24 +130,12 @@ export default function Flower(props: IFlowerProps) {
       });
 
     const g = wrapper.append("g");
-    g.attr("opacity", (d) => {
-      switch (true) {
-        // hyperthyroid
-        case d.colorStatus === "hyper" && currentIndex === 0:
-          return 1;
-        // midhyperthyroid
-        case d.colorStatus === "midhyper" && currentIndex === 1:
-          return 1;
-        // hypo
-        case d.colorStatus === "hypo" && currentIndex === 2:
-          return 1;
-        // euthyroid
-        case d.colorStatus === "euthyroid" && currentIndex === 3:
-          return 1;
-        default:
-          return 0.2;
-      }
-    });
+    g.attr("opacity", (d) => opacitySwitch(d));
+
+    // When you want to update opacity with a smooth transition:
+    g.transition()
+      .duration(600) // duration in ms
+      .attr("opacity", (d) => opacitySwitch(d));
     // Let's create a tooltip SVG text element
     d3.select("body")
       .append("div")

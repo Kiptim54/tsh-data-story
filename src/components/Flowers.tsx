@@ -4,7 +4,12 @@ import { useState } from "react";
 
 // COMPONENTS
 import Flower from "./charts/Flower";
-
+type stepParams = {
+  // element: any; // The DOM node of the step that was triggered
+  data: number | null; // The data supplied to the step
+  direction: "up" | "down"; // 'up' or 'down'
+  // entry: any; // the original `IntersectionObserver` entry
+};
 export default function Flowers() {
   const [currentStepIndex, setCurrentStepIndex] = useState<null | number>(null);
 
@@ -20,8 +25,14 @@ export default function Flowers() {
 
   // This callback fires when a Step hits the offset threshold. It receives the
   // data prop of the step, which in this demo stores the index of the step.
-  const onStepEnter = ({ data }: { data: number | null }) => {
+  const onStepEnter = ({ data }: stepParams) => {
     setCurrentStepIndex(data);
+  };
+
+  const onStepExit = ({ data, direction }: stepParams) => {
+    if (data === 0 && direction === "up") {
+      setCurrentStepIndex(null);
+    }
   };
   return (
     <div className='p-6 md:p-10 container mx-auto'>
@@ -64,13 +75,19 @@ export default function Flowers() {
           from Noun Project (CC BY 3.0)
         </sub>
       </div>
+      <div style={{ height: "60vh" }} />
+
       <div className='w-full flex flex-col items-center'>
-        <Scrollama offset={0.9} onStepEnter={onStepEnter}>
+        <Scrollama
+          offset={0.9}
+          onStepEnter={onStepEnter}
+          onStepExit={onStepExit}
+        >
           {steps.map((item, index) => (
             <Step data={index} key={index}>
               <div
                 style={{
-                  margin: "40vh 0",
+                  margin: `${currentStepIndex === 1 ? "40vh 0" : "40vh 0"}`,
                   opacity: currentStepIndex === index ? 1 : 0.7,
                 }}
                 className='bg-primary-100 shadow w-3/4 mx-auto rounded p-10 relative flex flex-col gap-4'
