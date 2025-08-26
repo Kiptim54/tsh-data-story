@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import * as d3 from "d3";
 
 import { thyroidPath, butterflyPath } from "./constants";
+
 type colorStatus =
   | "hypo"
   | "midhypo"
@@ -17,9 +18,12 @@ export type TData = {
   status: "N" | "H" | "L";
   colorStatus: colorStatus;
 };
-
-export default function Flower() {
+interface IFlowerProps {
+  currentIndex: number | null;
+}
+export default function Flower(props: IFlowerProps) {
   const [data, setData] = useState<TData[]>([]);
+  const { currentIndex = 0 } = props;
 
   const tshLevel = (level: number): colorStatus => {
     switch (true) {
@@ -76,7 +80,10 @@ export default function Flower() {
       .attr("width", dimensions.width)
       .attr("height", dimensions.height + 50)
       .attr("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`)
-      .attr("style", "height: intrinsic; padding:12, max-width:50%")
+      .attr(
+        "style",
+        "height: intrinsic; padding:12, max-width:50%, position:relative"
+      )
       .on("mouseenter", function (event, d) {
         const date = new Date(d.date).toLocaleDateString("en-GB", {
           month: "short",
@@ -101,8 +108,26 @@ export default function Flower() {
       });
 
     const g = wrapper.append("g");
+    g.attr("opacity", (d) => {
+      switch (true) {
+        // hyperthyroid
+        case d.colorStatus === "hyper" && currentIndex === 0:
+          return 1;
+        // midhyperthyroid
+        case d.colorStatus === "midhyper" && currentIndex === 1:
+          return 1;
+        // hypo
+        case d.colorStatus === "hypo" && currentIndex === 2:
+          return 1;
+        // euthyroid
+        case d.colorStatus === "euthyroid" && currentIndex === 3:
+          return 1;
+        default:
+          return 0.2;
+      }
+    });
     // Let's create a tooltip SVG text element
-    d3.select("#flower-chart")
+    d3.select("body")
       .append("div")
       .attr("id", "tooltip")
       .style("position", "absolute")
@@ -120,6 +145,7 @@ export default function Flower() {
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("fill", "#333")
+
       .text(
         (d: TData) =>
           `${new Date(d.date).toLocaleDateString("en-GB", {
@@ -376,7 +402,7 @@ export default function Flower() {
     });
 
     // add the flowerSVg inside the g
-  }, [dimensions, data]);
+  }, [dimensions, data, currentIndex]);
 
   return (
     <div
