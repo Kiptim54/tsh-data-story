@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import * as d3 from "d3";
-
+import { motion } from "framer-motion";
 import { thyroidPath, butterflyPath } from "./constants";
 
 type colorStatus =
@@ -415,9 +415,16 @@ export default function Flower(props: IFlowerProps) {
   }, [dimensions, data, currentIndex]);
 
   return (
-    <div
+    <motion.div
+      layout
+      layoutId='flower-chart'
       id='flower-chart'
-      className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4'
-    ></div>
+      transition={{ layout: { duration: 0.5, type: "spring" } }} // Optional: customize animation
+      className={` grid grid-cols-2 gap-4 ${
+        currentIndex === null
+          ? "md:grid-cols-4 lg:grid-cols-5"
+          : "md:grid-cols-3 lg:grid-cols-3"
+      }   `}
+    ></motion.div>
   );
 }

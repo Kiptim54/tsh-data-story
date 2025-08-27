@@ -7,7 +7,7 @@ import Flowers from "./components/Flowers.tsx";
 
 function App() {
   return (
-    <section className='bg-primary-100 min-h-screen text-primary-900 font-inclusive'>
+    <section className='bg-primary-100 min-h-screen text-primary-900 font-inclusive flex flex-col gap-8'>
       <Header />
       <Diagnosis />
       <Flowers />
