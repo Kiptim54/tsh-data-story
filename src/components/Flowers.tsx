@@ -1,7 +1,7 @@
 import "../style.css";
 import { Scrollama, Step } from "react-scrollama";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 
 // COMPONENTS
 import Flower from "./charts/Flower";

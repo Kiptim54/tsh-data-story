@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import * as d3 from "d3";
 import { motion } from "framer-motion";
 import { thyroidPath, butterflyPath } from "./constants";
@@ -43,27 +43,30 @@ export default function Flower(props: IFlowerProps) {
     }
   };
 
-  const opacitySwitch = (d: TData) => {
-    switch (true) {
-      // default
-      case currentIndex == null:
-        return 1;
-      // hyperthyroid
-      case d.colorStatus === "hyper" && currentIndex === 0:
-        return 1;
-      // midhyperthyroid
-      case d.colorStatus === "midhyper" && currentIndex === 1:
-        return 1;
-      // hypo
-      case d.colorStatus === "hypo" && currentIndex === 2:
-        return 1;
-      // euthyroid
-      case d.colorStatus === "euthyroid" && currentIndex === 3:
-        return 1;
-      default:
-        return 0.1;
-    }
-  };
+  const opacitySwitch = useCallback(
+    (d: TData) => {
+      switch (true) {
+        // default
+        case currentIndex == null:
+          return 1;
+        // hyperthyroid
+        case d.colorStatus === "hyper" && currentIndex === 0:
+          return 1;
+        // midhyperthyroid
+        case d.colorStatus === "midhyper" && currentIndex === 1:
+          return 1;
+        // hypo
+        case d.colorStatus === "hypo" && currentIndex === 2:
+          return 1;
+        // euthyroid
+        case d.colorStatus === "euthyroid" && currentIndex === 3:
+          return 1;
+        default:
+          return 0.1;
+      }
+    },
+    [currentIndex]
+  );
 
   useEffect(() => {
     d3.csv("/data/thyroid-tests.csv").then((data) => {
@@ -412,7 +415,7 @@ export default function Flower(props: IFlowerProps) {
     });
 
     // add the flowerSVg inside the g
-  }, [dimensions, data, currentIndex]);
+  }, [dimensions, data, currentIndex, opacitySwitch]);
 
   return (
     <motion.div
