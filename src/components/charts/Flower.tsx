@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import * as d3 from "d3";
 import { motion } from "framer-motion";
 import { thyroidPath, butterflyPath } from "./constants";
@@ -23,6 +23,11 @@ interface IFlowerProps {
 }
 export default function Flower(props: IFlowerProps) {
   const [data, setData] = useState<TData[]>([]);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // const [dimensionsState, setDimensionsState] = useState({
+  //   width: 180,
+  //   height: 160,
+  // });
   const { currentIndex = 0 } = props;
 
   const tshLevel = (level: number): colorStatus => {
@@ -67,6 +72,68 @@ export default function Flower(props: IFlowerProps) {
     },
     [currentIndex]
   );
+  // const legendItems = [
+  //   { label: "Hyperthyroid", color: "#DE2929" },
+  //   { label: "Mid-Hyperthyroid", color: "#EB8E44" },
+  //   { label: "Euthyroid", color: "#EB7044" },
+  //   { label: "Mid-Hypothyroid", color: "#B4E1EC" },
+  //   { label: "Hypothyroid", color: "#7BC4D6" },
+  // ];
+
+  useEffect(() => {
+    // Remove old legend if exists
+    d3.select("#legend-container").selectAll("svg").remove();
+
+    const svg = d3
+      .select("#legend-container")
+      .append("svg")
+      .attr("width", 400)
+      .attr("height", 50);
+
+    // Create gradient
+    const gradient = svg
+      .append("defs")
+      .append("linearGradient")
+      .attr("id", "colorGradient")
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "100%")
+      .attr("y2", "0%");
+
+    // Define stops according to tshLevel thresholds
+    const stops = [
+      { value: 0.01, color: "#DE2929" }, // hyper
+      { value: 0.04, color: "#DE2929" }, // midhyper
+      { value: 0.35, color: "#EB7044" }, // euthyroid
+      { value: 4.95, color: "#B4E1EC" }, // midhypo
+      { value: 6, color: "#7BC4D6" }, // hypo
+      { value: 20, color: "#7BC4D6" }, // extend to max
+    ];
+
+    stops.forEach((stop) => {
+      const offset = ((stop.value - 0.01) / (20 - 0.01)) * 100;
+      gradient
+        .append("stop")
+        .attr("offset", `${offset}%`)
+        .attr("stop-color", stop.color);
+    });
+
+    // Draw the rect using gradient
+    svg
+      .append("rect")
+      .attr("x", 10)
+      .attr("y", 10)
+      .attr("width", 380)
+      .attr("height", 20)
+      .style("fill", "url(#colorGradient)");
+
+    // Add axis matching the TSH range
+    const [min, max] = d3.extent(data, (d) => d.tsh) as [number, number];
+    console.log({ min, max });
+    const xScale = d3.scaleLinear().domain([0, max]).range([10, 390]);
+    const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d3.format(".2f"));
+    svg.append("g").attr("transform", "translate(0,30)").call(xAxis);
+  }, [data]);
 
   useEffect(() => {
     d3.csv("/data/thyroid-tests.csv").then((data) => {
@@ -84,6 +151,21 @@ export default function Flower(props: IFlowerProps) {
       setData(parsedData);
     });
   }, []);
+
+  // //   Update dimensions on resize
+  // useEffect(() => {
+  //   const updateDimensions = () => {
+  //     if (wrapperRef.current) {
+  //       const { width, height } = wrapperRef.current.getBoundingClientRect();
+
+  //       setDimensionsState({ width, height });
+  //     }
+  //   };
+
+  //   updateDimensions();
+  //   window.addEventListener("resize", updateDimensions);
+  //   return () => window.removeEventListener("resize", updateDimensions);
+  // }, []);
 
   const dimensions = useMemo(
     () => ({
@@ -418,16 +500,21 @@ export default function Flower(props: IFlowerProps) {
   }, [dimensions, data, currentIndex, opacitySwitch]);
 
   return (
-    <motion.div
-      layout
-      layoutId='flower-chart'
-      id='flower-chart'
-      transition={{ layout: { duration: 0.5, type: "spring" } }} // Optional: customize animation
-      className={` grid grid-cols-2 gap-4 ${
-        currentIndex === null
-          ? "md:grid-cols-4 lg:grid-cols-5"
-          : "md:grid-cols-3 lg:grid-cols-3"
-      }   `}
-    ></motion.div>
+    <>
+      <div id='legend-container' className='my-8 flex justify-center'></div>
+
+      <motion.div
+        ref={wrapperRef}
+        layout
+        layoutId='flower-chart'
+        id='flower-chart'
+        transition={{ layout: { duration: 0.5, type: "spring" } }} // Optional: customize animation
+        className={` grid grid-cols-2 gap-4 ${
+          currentIndex === null
+            ? "md:grid-cols-4 lg:grid-cols-5"
+            : "md:grid-cols-3 lg:grid-cols-3"
+        }   `}
+      ></motion.div>
+    </>
   );
 }
