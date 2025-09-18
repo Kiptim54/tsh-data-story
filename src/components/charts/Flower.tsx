@@ -265,7 +265,7 @@ export default function Flower(props: IFlowerProps) {
             month: "short",
             day: "numeric",
             year: "numeric",
-          })}`
+          })} \n - ${d.tsh}`
       );
 
     // Append body of buttefly
