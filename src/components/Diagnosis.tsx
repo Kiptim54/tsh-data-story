@@ -2,7 +2,7 @@ import Tulip from "../assets/header-thyroid-buttefly.svg";
 
 export default function Diagnosis() {
   return (
-    <div className='flex flex-col-reverse md:flex-row  gap-4  items-center justify-between container mx-auto p-10 '>
+    <div className='flex flex-col-reverse md:flex-row  gap-4  items-start justify-between container mx-auto p-10 '>
       <div className='flex-1 gap-4 flex flex-col '>
         <h2 className='text-2xl text-secondary-400 font-bold font-lora'>
           The Diagnosis
@@ -54,17 +54,19 @@ export default function Diagnosis() {
           swelling folders and malfunctioning computers.
         </p>
       </div>
-      <figure className='flex-1 flex flex-col justify-end items-center gap-6'>
-        <img
-          src={Tulip}
-          alt='tulip-flower-svg'
-          className=' w-[80%] md:w-[70%] h-auto'
-        />
-        <figcaption className='text-xs italic'>
-          The thyroid gland is also called the butterfly gland due to its
-          buttefly shape
-        </figcaption>
-      </figure>
+      <div className='flex-1 flex flex-col justify-center items-center gap-6 static md:sticky  top-10'>
+        <figure className='flex flex-col gap-6'>
+          <img
+            src={Tulip}
+            alt='tulip-flower-svg'
+            className=' w-[80%] md:w-[90%] h-auto mx-auto'
+          />
+          <figcaption className='text-xs italic md:w-3/4 text-center mx-auto'>
+            The thyroid gland is also called the butterfly gland due to its
+            buttefly shape
+          </figcaption>
+        </figure>
+      </div>
     </div>
   );
 }

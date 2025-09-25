@@ -110,7 +110,7 @@ export default function Flowers() {
             <Step data={index} key={index}>
               <div
                 style={{
-                  margin: "40vh 0",
+                  margin: "30vh 0",
                   opacity: currentStepIndex === index ? 1 : 0.8,
                 }}
                 className='bg-primary-100 shadow w-3/4 md:w-1/2 mx-auto rounded p-10 relative flex flex-col gap-4'

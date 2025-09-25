@@ -18,6 +18,13 @@ export type TData = {
   status: "N" | "H" | "L";
   colorStatus: colorStatus;
 };
+
+const currentIndexItems: Record<number, colorStatus> = [
+  "hyper",
+  "midhyper",
+  "hypo",
+  "euthyroid",
+];
 interface IFlowerProps {
   currentIndex: number | null;
 }
@@ -166,9 +173,18 @@ export default function Flower(props: IFlowerProps) {
           colorStatus: tshLevel(Number(d.tsh)) || "hypo",
         };
       });
-      setData(parsedData);
+
+      // filter out based on color status
+      if (currentIndex !== null) {
+        const filterData = parsedData.filter(
+          (d) => d.colorStatus === currentIndexItems[currentIndex]
+        );
+        setData(filterData);
+      } else {
+        setData(parsedData);
+      }
     });
-  }, []);
+  }, [currentIndex]);
 
   // //   Update dimensions on resize
   // useEffect(() => {
