@@ -8,6 +8,7 @@ export default function Footer() {
           <a
             href='https://www.brendakiptim.me/'
             className='text-secondary-500 '
+            target='_blank'
           >
             Brenda Kiptim
           </a>
@@ -17,6 +18,7 @@ export default function Footer() {
           <a
             href='https://www.brendakiptim.me/'
             className='text-secondary-500 '
+            target='_blank'
           >
             Brenda Kiptim
           </a>
