@@ -3,14 +3,15 @@ import * as d3 from "d3";
 import { motion } from "framer-motion";
 import { thyroidPath, butterflyPath } from "./constants";
 
-type colorStatus =
+export type colorStatus =
   | "hypo"
   | "midhypo"
   | "euthyroid"
   | "midhyper"
   | "hyper"
   | "none";
-export type TData = {
+
+type TData = {
   date: string;
   t3: number;
   t4: number;
@@ -25,9 +26,29 @@ const currentIndexItems: Record<number, colorStatus> = [
   "hypo",
   "euthyroid",
 ];
+
 interface IFlowerProps {
   currentIndex: number | null;
 }
+
+const tshLevel = (level: number): colorStatus => {
+  switch (true) {
+    case level <= 0.03:
+      return "hyper";
+    case level >= 0.04 && level <= 0.34:
+      return "midhyper";
+    case level >= 0.35 && level <= 4.94:
+      return "euthyroid";
+    case level >= 4.95 && level <= 6:
+      return "midhypo";
+    case level > 6:
+      return "hypo";
+
+    default:
+      return "none";
+  }
+};
+
 export default function Flower(props: IFlowerProps) {
   const [data, setData] = useState<TData[]>([]);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -36,24 +57,6 @@ export default function Flower(props: IFlowerProps) {
   //   height: 160,
   // });
   const { currentIndex = 0 } = props;
-
-  const tshLevel = (level: number): colorStatus => {
-    switch (true) {
-      case level <= 0.03:
-        return "hyper";
-      case level >= 0.04 && level <= 0.34:
-        return "midhyper";
-      case level >= 0.35 && level <= 4.94:
-        return "euthyroid";
-      case level >= 4.95 && level <= 6:
-        return "midhypo";
-      case level > 6:
-        return "hypo";
-
-      default:
-        return "none";
-    }
-  };
 
   const opacitySwitch = useCallback(
     (d: TData) => {

@@ -1,11 +1,12 @@
 import "../style.css";
 import { Scrollama, Step } from "react-scrollama";
 import { useState } from "react";
+
 // import { AnimatePresence, motion } from "framer-motion";
 
 // COMPONENTS
 import Flower from "./charts/Flower";
-type stepParams = {
+export type stepParams = {
   // element: any; // The DOM node of the step that was triggered
   data: number | null; // The data supplied to the step
   direction: "up" | "down"; // 'up' or 'down'
@@ -46,25 +47,27 @@ export default function Flowers() {
   };
 
   return (
-    <div className='p-6  container mx-auto'>
+    <div className='p-6  container mx-auto min-h-screen'>
       <div
         // key={currentStepIndex === null ? "all-parent" : "split-parent"}
-        className='sticky z-0 top-0'
+        className={`${
+          currentStepIndex != null ? "sticky" : "static"
+        } z-0 top-0`}
       >
-        <div className='flex flex-col gap-1.5'>
+        <div className='flex flex-col gap-1.5 text-center'>
           <h3 className='font-semibold text-2xl text-secondary-400 font-lora'>
-            Using flowers to show the progress of my thyroid hormones progress
-            (T3, T4, TSH):{" "}
+            Using butterflies to visualize my thryoid journey and how it
+            reflected my inner world.
           </h3>
-          <p className='font-lora text-lg md:w-3/4'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod veniam
-            esse eius id deleniti. Expedita maxime laborum et assumenda quis
-            officia optio dolorum beatae laboriosam, unde autem facilis
-            obcaecati quam atque mollitia.
+          <p className='font-lora text-normal md:w-3/4 mx-auto'>
+            TSH (Thyroid-Stimulating Hormone) is considered the most important
+            marker when tracking your thyroid journey because it acts like the
+            master signal that controls how much thyroid hormone your body
+            produces.
           </p>
         </div>
 
-        <div className='grid grid-cols-4 gap-4 py-10'>
+        <div className='grid grid-cols-4 gap-4 '>
           <div
             // key={currentStepIndex === null ? "all" : "split"}
             className={`${
@@ -98,14 +101,9 @@ export default function Flowers() {
           from Noun Project (CC BY 3.0)
         </sub>
       </div>
-      {/* <div className='20vh ' /> */}
 
       <div className='w-full flex flex-col md:items-end items-center'>
-        <Scrollama
-          offset={0.9}
-          onStepEnter={onStepEnter}
-          onStepExit={onStepExit}
-        >
+        <Scrollama offset={1} onStepEnter={onStepEnter} onStepExit={onStepExit}>
           {steps.map((item, index) => (
             <Step data={index} key={index}>
               <div
