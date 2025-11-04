@@ -14,7 +14,7 @@ export default function LineChartSection() {
     },
     {
       title: "Beyond the numbers...",
-      text: "Still beyond the numbers, I felt there was a part of my experience that was not being captured. How could we explain that the 5mg increase in carbimazole had reduced my racing heart and panic attacks but now I felt blue and could barely see the sun. My doctor was satisfied with the numbers but anything beyond and my emotions that felt beyond him.",
+      text: "Still beyond the numbers, I felt there was a huge part of my experience that was not being captured. How could we explain that the 5mg increase in carbimazole had reduced my racing heart and panic attacks but now I felt blue and could barely see the sun. My doctor was satisfied with the numbers but my emotional word felt beyond him.",
     },
   ];
 

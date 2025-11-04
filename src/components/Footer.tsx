@@ -24,7 +24,7 @@ export default function Footer() {
           </a>
         </p>
       </div>
-      &copy; 2025
+      African Data Stories &copy; 2025
     </footer>
   );
 }

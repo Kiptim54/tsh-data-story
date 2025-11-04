@@ -17,7 +17,7 @@ export default function Diagnosis() {
           <br />
           <br />
           No matter how early I arrived, I was never first. Being in the top six
-          felt safe; anything beyond that blurred into a line of tired faces.
+          felt safe; anything beyond that blurred into a string of tired faces.
           Between an exhausted doctor and an unspoken 15-minute countdown, I
           often left feeling more confused than when I came in. This was my
           reality after being diagnosed with Graves’ disease. Every visit was a

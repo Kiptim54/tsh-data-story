@@ -214,12 +214,39 @@ export default function Flower(props: IFlowerProps) {
   );
 
   useEffect(() => {
+    // clear existing children
     d3.select("#flower-chart").selectAll("*").remove();
-    const wrapper = d3
+
+    // Create a container div for each data item so we can render a label above the SVG
+    const containers = d3
       .select("#flower-chart")
-      .selectAll("svg")
+      .selectAll("div.flower-item")
       .data(data)
       .enter()
+      .append("div")
+      .attr("class", "flower-item")
+      .style("display", "flex")
+      .style("flex-direction", "column")
+      .style("align-items", "center");
+
+    // HTML label above the SVG (prevents overlap)
+    containers
+      .append("div")
+      .attr("class", "flower-label")
+      .style("text-align", "center")
+      .style("margin-bottom", "4px")
+      .style("font-size", "12px")
+      .html((d: TData) => {
+        const date = new Date(d.date).toLocaleDateString("en-GB", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+        return `${date}<br/><strong>TSH:</strong> ${d.tsh}`;
+      });
+
+    // append SVG inside each container
+    const svg = containers
       .append("svg")
       .attr("width", dimensions.width)
       .attr("height", dimensions.height + 50)
@@ -251,41 +278,27 @@ export default function Flower(props: IFlowerProps) {
         d3.select("#tooltip").style("display", "none");
       });
 
-    const g = wrapper.append("g");
+    const g = svg.append("g");
     g.attr("opacity", (d) => opacitySwitch(d));
 
     // When you want to update opacity with a smooth transition:
     g.transition()
       .duration(600) // duration in ms
       .attr("opacity", (d) => opacitySwitch(d));
-    // Let's create a tooltip SVG text element
-    d3.select("body")
-      .append("div")
-      .attr("id", "tooltip")
-      .style("position", "absolute")
-      .style("background", "#fff")
-      .style("border", "1px solid #ccc")
-      .style("padding", "4px 8px")
-      .style("border-radius", "4px")
-      .style("pointer-events", "none")
-      .style("display", "none");
 
-    // add text with the date
-    g.append("text")
-      .attr("x", dimensions.width / 2)
-      .attr("y", -10)
-      .attr("text-anchor", "middle")
-      .attr("font-size", "16px")
-      .attr("fill", "#333")
-
-      .text(
-        (d: TData) =>
-          `${new Date(d.date).toLocaleDateString("en-GB", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })} \n - ${d.tsh}`
-      );
+    // Let's create a tooltip HTML element (once)
+    if (d3.select("body").selectAll("#tooltip").empty()) {
+      d3.select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("position", "absolute")
+        .style("background", "#fff")
+        .style("border", "1px solid #ccc")
+        .style("padding", "4px 4px")
+        .style("border-radius", "4px")
+        .style("pointer-events", "none")
+        .style("display", "none");
+    }
 
     // Append body of buttefly
     g.append("path")
@@ -315,10 +328,10 @@ export default function Flower(props: IFlowerProps) {
     // add defs to gradients to the buttefly
     // Append defs with gradients
     // inside your useEffect, after creating `wrapper`
-    wrapper.each(function () {
-      const svg = d3.select(this);
+    svg.each(function (this: SVGSVGElement) {
+      const svgEl = d3.select(this);
 
-      const defs = svg.append("defs");
+      const defs = svgEl.append("defs");
 
       // --- Euthyroid ---
       const e0 = defs
