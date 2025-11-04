@@ -19,13 +19,21 @@ export default function Summary() {
         <br />
         <br />
         Recently, I read that the
-        <b> 2025 Nobel Prize in Physiology or Medicine</b> was awarded to
-        scientists whose discoveries shed light on how the immune system can
-        attack the body’s own cells while normally defending against infections.
-        The prize was shared by Japan’s Shimon Sakaguchi and US researchers Mary
-        Brunkow and Fred Ramsdell. They discovered the “security guards” of the
-        immune system that eliminate immune cells that could otherwise attack
-        the body.{" "}
+        <b>
+          {" "}
+          <a
+            href='https://www.bbc.com/news/articles/c2knwvpd7vno'
+            target='_blank'
+          >
+            2025 Nobel Prize in Physiology or Medicine
+          </a>
+        </b>{" "}
+        was awarded to scientists whose discoveries shed light on how the immune
+        system can attack the body’s own cells while normally defending against
+        infections. The prize was shared by Japan’s Shimon Sakaguchi and US
+        researchers Mary Brunkow and Fred Ramsdell. They discovered the
+        “security guards” of the immune system that eliminate immune cells that
+        could otherwise attack the body.{" "}
         <b>
           Their work is now being used to develop new treatments for autoimmune
           diseases and cancer
