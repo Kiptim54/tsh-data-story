@@ -10,6 +10,7 @@ export type TData = {
   tsh: number;
   status: "N" | "H" | "L";
   colorStatus: colorStatus;
+  description: string;
 };
 
 const tshLevel = (level: number): colorStatus => {

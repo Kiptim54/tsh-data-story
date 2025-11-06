@@ -12,6 +12,7 @@ import type { TData } from "./charts/LineChart";
 
 export default function ThyroidTable() {
   const parseDate = d3.timeParse("%d/%m/%Y");
+  const formatDate = d3.timeFormat("%d %b %Y");
   const [data, setData] = useState<TData[]>([]);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function ThyroidTable() {
             t4: d.t4 ? +d.t4 : 0,
             tsh: d.tsh ? +d.tsh : 0,
             status: (d.status as "N" | "H" | "L") || "N",
+            description: d.description || "",
             // colorStatus: tshLevel(Number(d.tsh)) || "hypo",
           };
         })
@@ -43,20 +45,22 @@ export default function ThyroidTable() {
       <TableHeader className='bg-slate-200 rounded-md p-2 '>
         <TableRow>
           <TableHead>Date</TableHead>
-          <TableHead>TSH</TableHead>
-          <TableHead>FT3</TableHead>
-          <TableHead>T4</TableHead>
+          <TableHead>TSH (uIU/mL)</TableHead>
+          <TableHead>FT3 (pmol/L)</TableHead>
+          <TableHead>T4 (pmol/L)</TableHead>
+          <TableHead>Description</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((entry) => (
           <TableRow key={entry.date.toISOString()}>
-            <TableCell className='font-medium'>
-              {entry.date.toLocaleDateString()}
+            <TableCell className='font-medium min-w-[120px]'>
+              {formatDate(entry.date)}
             </TableCell>
             <TableCell>{entry.tsh}</TableCell>
             <TableCell>{entry.t3}</TableCell>
             <TableCell>{entry.t4}</TableCell>
+            <TableCell>{entry.description}</TableCell>
           </TableRow>
         ))}
         {/* <TableRow>

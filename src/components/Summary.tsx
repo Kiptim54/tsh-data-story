@@ -5,7 +5,7 @@ export default function Summary() {
         Where do we go from here?
       </h2>
       <p className='text-lg md:w-3/4'>
-        I am already due for my next lab work to find out whether my persistent
+        I am already due for my next lab test to find out whether my persistent
         sore throat is a sign of relapse or just another inconvenience of life.
         I am slowly realising that{" "}
         <b>living with a chronic illness is a marathon, not a sprint,</b> with a
