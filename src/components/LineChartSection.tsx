@@ -42,7 +42,7 @@ export default function LineChartSection() {
           <div className='shadow-lg p-2'>
             <ThyroidTable />
           </div>
-          <div className='shadow-lg p-2'>
+          <div className='shadow-lg p-2 flex justify-center items-center'>
             <LineChart />
           </div>
         </div>
