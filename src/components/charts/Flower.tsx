@@ -18,6 +18,7 @@ type TData = {
   tsh: number;
   status: "N" | "H" | "L";
   colorStatus: colorStatus;
+  category: number;
 };
 
 const currentIndexItems: Record<number, colorStatus> = [
@@ -66,10 +67,14 @@ export default function Flower(props: IFlowerProps) {
           return 1;
         // hyperthyroid
         case d.colorStatus === "hyper" && currentIndex === 0:
+          // case d.category === 0 && currentIndex === 0:
           return 1;
         // midhyperthyroid
-        case d.colorStatus === "midhyper" && currentIndex === 1:
+        case d.colorStatus === "midhyper" &&
+          d.category == 1 &&
+          currentIndex === 1:
           return 1;
+
         // hypo
         case d.colorStatus === "hypo" && currentIndex === 2:
           return 1;
@@ -86,19 +91,26 @@ export default function Flower(props: IFlowerProps) {
   useEffect(() => {
     if (data.length === 0) return; // wait until data is loaded
 
-    const legendItems = [
-      { label: "Hyperthyroid", color: "#DE2929" },
-      { label: "Subclinical Hyper", color: "#EB8E44" },
-      { label: "Euthyroid", color: "#EB7044" },
-      { label: "Subclinical Hypo", color: "#B4E1EC" },
-      { label: "Hypothyroid", color: "#7BC4D6" },
+    // const legendItems = [
+    //   { label: "Hyperthyroid", color: "#DE2929" },
+    //   { label: "Subclinical Hyper", color: "#EB8E44" },
+    //   { label: "Euthyroid", color: "#EB7044" },
+    //   { label: "Subclinical Hypo", color: "#B4E1EC" },
+    //   { label: "Hypothyroid", color: "#7BC4D6" },
+    // ];
+    const moodLegend = [
+      { label: "Panic/Anxiety", color: "#DE2929" },
+      { label: "Restless", color: "#EB8E44" },
+      { label: "Stable", color: "#EB7044" },
+      { label: "Low Energy", color: "#B4E1EC" },
+      { label: "Depressed/Brain Fog", color: "#7BC4D6" },
     ];
 
     // Remove old SVG
     d3.select("#legend-container").selectAll("svg").remove();
 
     const svgWidth = 800;
-    const svgHeight = 100;
+    const svgHeight = 150;
     const rectSize = 15;
     const spacing = 10;
     const startX = 10;
@@ -119,48 +131,92 @@ export default function Flower(props: IFlowerProps) {
       .attr("height", 20)
       .style("fill", "url(#colorGradient)");
 
-    // Create the categorical legend group
-    const legend = svg
-      .selectAll("g.legend-item")
-      .data(legendItems)
+    // // Create the categorical legend group
+    // const legend = svg
+    //   .selectAll("g.legend-item")
+    //   .data(legendItems)
+    //   .enter()
+    //   .append("g")
+    //   .attr("class", "legend-item");
+
+    // // Append rectangles
+    // legend
+    //   .append("rect")
+    //   .attr("width", rectSize)
+    //   .attr("height", rectSize)
+    //   .attr("fill", (d) => d.color);
+
+    // // Append text with word-wrapping
+    // legend
+    //   .append("text")
+    //   .attr("x", rectSize + 5)
+    //   .attr("y", rectSize / 2)
+    //   .attr("font-size", "12px")
+    //   .each(function (d) {
+    //     const words = d.label.split(" ");
+    //     const lineHeight = 12;
+    //     const text = d3.select(this);
+    //     words.forEach((word, i) => {
+    //       text
+    //         .append("tspan")
+    //         .attr("x", rectSize + 5)
+    //         .attr("dy", i === 0 ? 0 : lineHeight)
+    //         .text(word);
+    //     });
+    //   });
+
+    // // Position each legend group dynamically to avoid overlap
+    // let cumulativeX = startX;
+    // legend.attr("transform", function () {
+    //   const bbox = this.getBBox();
+    //   const x = cumulativeX;
+    //   cumulativeX += bbox.width + spacing;
+    //   return `translate(${x}, ${startY})`;
+    // });
+
+    // ---- MOOD LEGEND ----
+    const moodGroup = svg.append("g").attr("class", "mood-legend");
+
+    const moodStartY = startY + 40; // place below thyroid legend
+    let moodCumulativeX = startX;
+
+    const mood = moodGroup
+      .selectAll("g.mood-item")
+      .data(moodLegend)
       .enter()
       .append("g")
-      .attr("class", "legend-item");
+      .attr("class", "mood-item");
 
-    // Append rectangles
-    legend
+    mood
       .append("rect")
       .attr("width", rectSize)
       .attr("height", rectSize)
       .attr("fill", (d) => d.color);
 
-    // Append text with word-wrapping
-    legend
+    mood
       .append("text")
       .attr("x", rectSize + 5)
       .attr("y", rectSize / 2)
       .attr("font-size", "12px")
-      .each(function (d) {
-        const words = d.label.split(" ");
-        const lineHeight = 12;
-        const text = d3.select(this);
-        words.forEach((word, i) => {
-          text
-            .append("tspan")
-            .attr("x", rectSize + 5)
-            .attr("dy", i === 0 ? 0 : lineHeight)
-            .text(word);
-        });
-      });
+      .attr("dominant-baseline", "middle")
+      .text((d) => d.label);
 
-    // Position each legend group dynamically to avoid overlap
-    let cumulativeX = startX;
-    legend.attr("transform", function () {
+    // Position mood legend horizontally like the first legend
+    mood.attr("transform", function () {
       const bbox = this.getBBox();
-      const x = cumulativeX;
-      cumulativeX += bbox.width + spacing;
-      return `translate(${x}, ${startY})`;
+      const x = moodCumulativeX;
+      moodCumulativeX += bbox.width + spacing;
+      return `translate(${x}, ${moodStartY})`;
     });
+
+    // Add a title above mood scale
+    svg
+      .append("text")
+      .attr("x", startX)
+      .attr("y", moodStartY - 10)
+      .attr("font-size", "13px")
+      .attr("font-weight", "600")
+      .text("Mood Scale");
   }, [data]);
 
   useEffect(() => {
@@ -174,6 +230,7 @@ export default function Flower(props: IFlowerProps) {
           tsh: d.tsh ? +d.tsh : 0,
           status: (d.status as "N" | "H" | "L") || "N",
           colorStatus: tshLevel(Number(d.tsh)) || "hypo",
+          category: d.category ? +d.category : 0,
         };
       });
 
