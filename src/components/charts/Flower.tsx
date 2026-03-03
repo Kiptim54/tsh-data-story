@@ -85,7 +85,7 @@ export default function Flower(props: IFlowerProps) {
           return 0.1;
       }
     },
-    [currentIndex]
+    [currentIndex],
   );
 
   useEffect(() => {
@@ -237,7 +237,7 @@ export default function Flower(props: IFlowerProps) {
       // filter out based on color status
       if (currentIndex !== null) {
         const filterData = parsedData.filter(
-          (d) => d.colorStatus === currentIndexItems[currentIndex]
+          (d) => d.colorStatus === currentIndexItems[currentIndex],
         );
         setData(filterData);
       } else {
@@ -267,7 +267,7 @@ export default function Flower(props: IFlowerProps) {
       height: 160,
       margin: { top: 20, right: 30, bottom: 30, left: 40 },
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -310,7 +310,7 @@ export default function Flower(props: IFlowerProps) {
       .attr("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`)
       .attr(
         "style",
-        "height: intrinsic; padding:12, max-width:50%, position:relative"
+        "height: intrinsic; padding:12, max-width:50%, position:relative",
       )
       .on("mouseenter", function (event, d) {
         const date = new Date(d.date).toLocaleDateString("en-GB", {
@@ -321,7 +321,7 @@ export default function Flower(props: IFlowerProps) {
         d3.select("#tooltip")
           .style("display", "block")
           .html(
-            `Date: <b>${date}</b>, <br/> TSH: <b>${d.tsh}</b>,<br/> T3:<b> ${d.t3}</b>,<br/> T4:<b> ${d.t4}</b>`
+            `Date: <b>${date}</b>, <br/> TSH: <b>${d.tsh}</b>,<br/> T3:<b> ${d.t3}</b>,<br/> T4:<b> ${d.t4}</b>`,
           )
           .style("left", event.pageX + 10 + "px")
           .style("top", event.pageY - 20 + "px");

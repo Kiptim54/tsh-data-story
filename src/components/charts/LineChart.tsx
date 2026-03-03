@@ -39,7 +39,7 @@ export default function LineChart() {
       height: 500,
       margin: { top: 20, right: 30, bottom: 30, left: 40 },
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function LineChart() {
       .append("g")
       .attr(
         "transform",
-        `translate(0, ${dimensions.height - dimensions.margin.bottom})`
+        `translate(0, ${dimensions.height - dimensions.margin.bottom})`,
       )
       .call(
         d3
@@ -136,7 +136,7 @@ export default function LineChart() {
           .tickFormat((d: Date | d3.NumberValue) => {
             const date = d instanceof Date ? d : new Date(d as number);
             return isNaN(date.getTime()) ? "" : d3.timeFormat("%b '%y")(date);
-          })
+          }),
       );
 
     // style and rotate labels to prevent overlap
@@ -227,15 +227,15 @@ export default function LineChart() {
       .append("rect")
       .attr(
         "width",
-        dimensions.width - dimensions.margin.left - dimensions.margin.right
+        dimensions.width - dimensions.margin.left - dimensions.margin.right,
       )
       .attr(
         "height",
-        dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+        dimensions.height - dimensions.margin.top - dimensions.margin.bottom,
       )
       .attr(
         "transform",
-        `translate(${dimensions.margin.left}, ${dimensions.margin.top})`
+        `translate(${dimensions.margin.left}, ${dimensions.margin.top})`,
       )
       .style("fill", "transparent")
       .style("pointer-events", "all")
@@ -250,7 +250,7 @@ export default function LineChart() {
         const d = data[i - 1] ?? data[0];
 
         const html = `<strong>Date:</strong>  ${new Date(
-          d.date
+          d.date,
         ).toLocaleDateString("en-UK")}<br/>
             <strong>TSH:</strong>${d.tsh}<br/>
             `;
@@ -295,14 +295,14 @@ export default function LineChart() {
 
       const scrollPercent = Math.min(
         1,
-        Math.max(0, (scrollTop - start) / (end - start))
+        Math.max(0, (scrollTop - start) / (end - start)),
       );
 
       const drawLength = pathLength * scrollPercent;
       const drawLengthRatings = pathLengthRatings * scrollPercent;
       d3.select(pathRatings).attr(
         "stroke-dashoffset",
-        pathLengthRatings - drawLengthRatings
+        pathLengthRatings - drawLengthRatings,
       );
       d3.select(path).attr("stroke-dashoffset", pathLength - drawLength);
       // d3.select(pathRatings).attr(

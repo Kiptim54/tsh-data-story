@@ -38,7 +38,7 @@ export default function ThyroidTable() {
 
       setData(parsedData);
     });
-  }, [parseDate]);
+  }, []);
   return (
     <Table>
       {/* <TableCaption>Thyroid Lab Test Results.</TableCaption> */}
