@@ -608,7 +608,7 @@ export default function Flower(props: IFlowerProps) {
 
   return (
     <>
-      <div id='legend-container' className='my-8 flex justify-center'></div>
+      <div id='legend-container' className='my-2 flex justify-center'></div>
 
       <motion.div
         ref={wrapperRef}

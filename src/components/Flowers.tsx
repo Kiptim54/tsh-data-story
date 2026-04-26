@@ -74,19 +74,21 @@ After seeing the results, my doctor reduced my dosage and explained that we were
       >
         <div className='flex flex-col gap-4'>
           <h3 className='font-semibold text-2xl text-secondary-400 font-lora'>
-            Using butterflies to visualize my thryoid journey and how it
-            reflected my inner world.
+            My thyroid journey, mapped in butterflies:
           </h3>
           <p
-            className={`font-lora text-normal  text-justify text-balance mx-auto ${
+            className={`font-lora text-normal  text-justify mx-auto ${
               currentStepIndex != null ? "hidden" : null
             } `}
           >
-            The thyroid gland, also called the butterfly gland because of its
-            shape, is the inspiration for using a butterfly to visualize this
-            journey. The pituitary gland, located in the brain, produces{" "}
-            <b>thyroid-stimulating hormone (TSH)</b>, which acts as the master
-            signal controlling how much thyroid hormone your body makes.
+            The thyroid gland is nicknamed the <b>butterfly gland</b> for its
+            shape, which is why I chose to use butterflies to map this journey.
+            Each butterfly's colour reflects my mood at the time of the blood
+            test, with the TSH level shown below.{" "}
+            <b>
+              TSH is a hormone produced by the brain that signals how hard the
+              thyroid needs to work to reach a balance/homeostasis
+            </b>
             <br /> <br />
             TSH is considered the most important marker when tracking your
             thyroid journey. When TSH is too low, the thyroid overproduces

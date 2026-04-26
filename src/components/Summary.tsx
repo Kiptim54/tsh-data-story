@@ -47,14 +47,15 @@ export default function Summary() {
         <h4 className='text-xl font-lora font-semibold  text-primary-500'>
           Background
         </h4>
-        <p className=' md:w-3/4'>
-          This story is a personal account of my journey with thyroid disease,
-          specifically focusing on the challenges of managing my condition
-          through regular lab tests and medication adjustments. It is done in a
-          bid to slowly bring awareness to the thyroid journey from. a patient's
-          perspective which is important especially in Kenya where there is not
-          enough localised data on thyroid conditions and the effects patients
-          have with different treatment options.
+        <p className=' md:w-3/4 text-lg'>
+          This is a personal account of living with Graves' disease, told
+          through the data I collected over three years of lab tests, medication
+          adjustments, and everything in between. Beyond the numbers, it is an
+          attempt to capture what it actually feels like to manage a chronic
+          illness: the confusion, the fog, the small victories. <br />
+          <br /> In Kenya, localised data on thyroid conditions remains scarce,
+          and the patient's perspective is rarely centred. This story is a small
+          step toward changing that.
         </p>
       </div>
     </section>
