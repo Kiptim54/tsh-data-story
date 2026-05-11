@@ -17,7 +17,7 @@ export default function Flowers() {
 
   const steps = [
     {
-      title: '<b class="text-[#DE2929]">Hyperthyrodism - The Lost Years</b>',
+      title: '<b class="text-[#DE2929]">Hyperthyroidism - The Lost Years</b>',
       text: `On average, it takes <b><a href="https://autoimmune.org/wp-content/uploads/2017/04/tips_for_auto_diagnosis.pdf" target="_blank">4.6 years to diagnose an autoimmune disease</a> </b>  With many symptoms that on the surface seem unrelated, even before 2022, I had multiple hospital visits and blood tests that came back inconclusive. During this period, I experienced daily nosebleeds, a persistent sore throat, progressive weight loss, a racing heart, and sporadic panic attacks.
           <br/><br/>
 
@@ -27,7 +27,7 @@ export default function Flowers() {
     },
     {
       title:
-        '<span class="bg-gradient-to-r from-[#DE2929] to-[#EB7044] bg-clip-text text-transparent font-semibold">Subclinical Hyperthyrodism - Brain Fog</span>',
+        '<span class="bg-gradient-to-r from-[#DE2929] to-[#EB7044] bg-clip-text text-transparent font-semibold">Subclinical Hyperthyroidism - Brain Fog</span>',
       text: `With my TSH finally responding and my hormone levels beginning to improve, I expected to feel normal. Instead, I found myself <b>trapped in a brain fog, barely able to remember whether I had taken my medication or even what day it was</b>.
      <br/><br/>
 My doctor was not alarmed by these symptoms and reassured me that as long as progress was being made, we should stick to the plan. That made sense — there was improvement, and a little brain fog and forgetfulness seemed tolerable in the context of overall recovery.
@@ -41,10 +41,10 @@ I also joined a <b>thyroid support group</b>, where members recommended switchin
 After seeing the results, my doctor reduced my dosage and explained that we were now on a journey of slowly trying to get me into remission, carefully adjusting my medication to restore balance.`,
     },
     {
-      title: "Euthyrodism  - Remission (Clouds Parting?)",
+      title: "Euthyroidism  - Remission (Clouds Parting?)",
       text: `Finally, my thyroid levels were <b>balanced</b>. The doctor still recommended a permanent solution, like <b>RAI (radioactive iodine) or surgery</b>, but I felt I wanted to give my body a chance. I was working out, eating well, and trying to stay clean (habits my doctor admitted likely didn’t influence my odds), but I felt it was worth trying.
          <br/><br/>
-      According to my doctor, on average, <b>only 30% of people remain in remission</b>, with the rest relapsing sooner rather than later. hirty percent seemed low, but I was too tired and too hopeful not to give myself a chance to see how my body would react without medication.
+      According to my doctor, on average, <b>only 30% of people remain in remission</b>, with the rest relapsing sooner rather than later. Thirty percent seemed low, but I was too tired and too hopeful not to give myself a chance to see how my body would react without medication.
 
       <br/><br/>
       After three years of this journey, it felt like the least I could do. Now, with <b> blood tests every three months</b>, maybe I could catch any relapse earlier this time and respond before it spirals out of control.

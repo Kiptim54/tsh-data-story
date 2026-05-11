@@ -10,7 +10,7 @@ export default function LineChartSection() {
   const steps = [
     {
       title: "Chats and Tables",
-      text: "The Charts and Tables initially amused my doctor, but proved to be quite useful in our consultations. Instead of rummaging through files we were able to answer questions about trends and expectations quickly. This gave me me time to ask more questions beyond the results and my concerns.",
+      text: "The Charts and Tables initially amused my doctor, but proved to be quite useful in our consultations. Instead of rummaging through files we were able to answer questions about trends and expectations quickly. This gave me time to ask more questions beyond the results and my concerns.",
     },
     {
       title: "Beyond the numbers...",
