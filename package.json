@@ -19,7 +19,7 @@
     "d3": "^7.9.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.548.0",
-    "next": "^16.0.3",
+    "next": "16.0.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scrollama": "^2.4.2",
