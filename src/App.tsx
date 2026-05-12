@@ -13,6 +13,7 @@ import Summary from "./components/Summary.tsx";
 // COMPONENTS
 
 import InfoDialog from "./components/ui/custom/InfoDialog.tsx";
+import { Analytics } from "@vercel/analytics/next";
 
 function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -31,6 +32,7 @@ function App() {
       <Footer />
 
       <InfoDialog open={dialogOpen} onClick={onClickInfoBtn} />
+      <Analytics />
     </section>
   );
 }
