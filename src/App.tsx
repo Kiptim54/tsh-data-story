@@ -13,7 +13,7 @@ import Summary from "./components/Summary.tsx";
 // COMPONENTS
 
 import InfoDialog from "./components/ui/custom/InfoDialog.tsx";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
